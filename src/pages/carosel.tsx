@@ -1,5 +1,4 @@
 import CardCarousel from "../components/card-carousel";
-import { cardsData } from "@/dummydata/colleges";
 
 // const cardsData = [
 //   {
@@ -44,7 +43,8 @@ import { cardsData } from "@/dummydata/colleges";
 //   },
 // ];
 
-export default function CarouselPage() {
+export default function CarouselPage({ props }) {
+  const { cardsData } = props;
   return (
     <div className="container mx-auto py-12">
       <CardCarousel cards={cardsData} />
