@@ -43,7 +43,7 @@ const CardCarousel = ({ cards }) => {
               key={index}
               className="flex-[0_0_100%] min-w-0 sm:flex-[0_0_calc(50%-8px)] md:flex-[0_0_calc(33.33%-16px)]"
             >
-              <CustomCard {...card} />
+              {/* <CustomCard {...card} /> */}
               <ProgramCard/>
             </div>
           ))}
