@@ -7,6 +7,7 @@ import {
   Users,
   Microchip,
   BookMarked,
+  BookOpen,
 } from "lucide-react";
 
 import {
@@ -25,27 +26,12 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
 export default function CommandDemo({ props }) {
   const { selectedSubjects, setSelectedSubjects, stream, setStream } = props;
-  const streams = [
-    "Science",
-    "Management",
-    "Humanities and Social Sciences",
-    "Education",
-    "Law",
-    "Technical and Vocational",
-    "Fine Arts",
-  ];
 
   const subjectOptions = {
     Science: [
@@ -74,15 +60,6 @@ export default function CommandDemo({ props }) {
     ],
     Fine_Arts: ["Visual Arts", "Music", "Theater", "Dance"],
   };
-
-  const locations = [
-    "Kathmandu",
-    "Pokhara",
-    "Biratnagar",
-    "Bharatpur",
-    "Lalitpur",
-    "Any location in Nepal",
-  ];
 
   const [open, setOpen] = useState(false);
   return (
@@ -115,7 +92,10 @@ export default function CommandDemo({ props }) {
               aria-expanded={open}
               className="w-full justify-between"
             >
-              Select courses...
+              <div className="flex items-center ">
+                <BookOpen className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                {selectedSubjects ? selectedSubjects : "Select course."}
+              </div>
               <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
             </Button>
           </div>
@@ -349,32 +329,6 @@ export default function CommandDemo({ props }) {
           </div>
         </PopoverContent>
       </Popover>
-      <div className="flex justify-center w-[400px] ">
-      
-
-      <DropdownMenu >
-        <DropdownMenuTrigger className="w-[400px]" ><Button
-              variant="outline"
-              role="combobox"
-              aria-expanded={open}
-              className="w-full justify-between"
-            >Select locations...
-            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-            </Button></DropdownMenuTrigger>
-        <DropdownMenuContent className="w-[400px] bg-white">
-          <DropdownMenuItem>Pokhara</DropdownMenuItem>
-          <DropdownMenuItem>Chitwan</DropdownMenuItem>
-          <DropdownMenuItem>Kathmandu</DropdownMenuItem>
-          <DropdownMenuItem>Biratnagar</DropdownMenuItem>
-          <DropdownMenuItem>Mahandranagar</DropdownMenuItem>
-          <DropdownMenuItem>Dharan</DropdownMenuItem>
-          <DropdownMenuItem>Butwal</DropdownMenuItem>
-          <DropdownMenuItem>Rupandehi</DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-            
-     </div>
-
     </>
   );
 }
