@@ -44,10 +44,14 @@ import CardCarousel from "../components/card-carousel";
 // ];
 
 export default function CarouselPage({ props }) {
-  const { cardsData } = props;
+  const { cardsData, setModalOpen, setDataIndex } = props;
   return (
     <div className="container mx-auto py-12">
-      <CardCarousel cards={cardsData} />
+      <CardCarousel
+        cards={cardsData}
+        setModalOpen={setModalOpen}
+        setDataIndex={setDataIndex}
+      />
     </div>
   );
 }

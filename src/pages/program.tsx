@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { MapPin, ChevronsUpDown, Edit, List } from "lucide-react";
+import { ChevronsUpDown, Edit, List, Target } from "lucide-react";
 
 const ProgramSelector = ({ props }) => {
   const { program, setProgram, selectedSubjects } = props;
@@ -163,22 +163,6 @@ const ProgramSelector = ({ props }) => {
 
   return (
     <div className="flex flex-col items-center w-[400px]">
-      <div className="flex justify-between w-full mb-2">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={toggleInputMode}
-          className="flex items-center"
-        >
-          {isManualInput ? (
-            <List className="mr-2" />
-          ) : (
-            <Edit className="mr-2" />
-          )}
-          {isManualInput ? "Select from list" : "Manual input"}
-        </Button>
-      </div>
-
       {isManualInput ? (
         <Input
           type="text"
@@ -193,11 +177,11 @@ const ProgramSelector = ({ props }) => {
             <Button
               variant="outline"
               role="combobox"
-              aria-expanded={open}
+              // aria-expanded={open}
               className="w-full justify-between"
             >
               <div className="flex items-center">
-                <MapPin className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+                <Target className="mr-2 h-4 w-4 shrink-0 opacity-50" />
                 {program
                   ? program
                   : selectedSubjects
@@ -219,6 +203,21 @@ const ProgramSelector = ({ props }) => {
           )}
         </DropdownMenu>
       )}
+      <div className="flex justify-between w-full mb-2">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={toggleInputMode}
+          className="flex items-center"
+        >
+          {isManualInput ? (
+            <List className="mr-2" />
+          ) : (
+            <Edit className="mr-2" />
+          )}
+          {isManualInput ? "or Select from list" : "or Type Instead"}
+        </Button>
+      </div>
     </div>
   );
 };

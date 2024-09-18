@@ -22,21 +22,18 @@ const location = ({ props }) => {
     <div className="flex justify-center w-[400px] ">
       <DropdownMenu>
         <DropdownMenuTrigger className="w-[400px]">
-          <div className="flex justify-center w-[400px] ">
-            <Button
-              variant="outline"
-              role="combobox"
-              aria-expanded={open}
-              className="w-full justify-between"
-            >
-              <div className="flex items-center ">
-                <MapPin className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-
-                {location ? location : "Select locations..."}
-              </div>
-              <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-            </Button>
-          </div>
+          <Button
+            variant="outline"
+            role="combobox"
+            // aria-expanded={open}
+            className="w-full justify-between"
+          >
+            <div className="flex items-center">
+              <MapPin className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+              {location ? location : "Select locations..."}
+            </div>
+            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-[400px] bg-white">
           {locations.map((loc) => (

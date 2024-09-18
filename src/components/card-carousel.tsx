@@ -3,9 +3,9 @@ import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import CustomCard from "./custom-card";
-import ProgramCard from "./programcard"
+import ProgramCard from "./programcard";
 
-const CardCarousel = ({ cards }) => {
+const CardCarousel = ({ cards, setModalOpen, setDataIndex }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: false,
     align: "start",
@@ -40,11 +40,15 @@ const CardCarousel = ({ cards }) => {
         <div className="flex gap-4">
           {cards.map((card, index) => (
             <div
-              key={index}
+              key={index + 1}
               className="flex-[0_0_100%] min-w-0 sm:flex-[0_0_calc(50%-8px)] md:flex-[0_0_calc(33.33%-16px)]"
+              onClick={() => {
+                setModalOpen(true);
+                setDataIndex(index);
+              }}
             >
               {/* <CustomCard {...card} /> */}
-              <ProgramCard/>
+              <ProgramCard {...card} />
             </div>
           ))}
         </div>

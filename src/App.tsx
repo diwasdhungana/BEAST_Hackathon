@@ -7,13 +7,16 @@ import { Button } from "./components/ui/button";
 import CarouselPage from "./pages/carosel";
 import { cardsData } from "@/dummydata/colleges";
 import ProgramSelector from "./pages/program";
+import Modal from "./components/modal";
 
 function App() {
   const [selectedSubjects, setSelectedSubjects] = useState<string>("");
   const [stream, setStream] = useState<string>("");
-  const [intrest, setIntrest] = useState<string>("");
+  // const [intrest, setIntrest] = useState<string>("");
   const [location, setLocation] = useState<string>("");
   const [program, setProgram] = useState<string>("");
+  const [modalOpen, setModalOpen] = useState(false);
+  const [dataIndex, setDataIndex] = useState<number>();
 
   const [caroselCardData, setCaroselCardData] = useState(cardsData);
 
@@ -36,7 +39,7 @@ function App() {
       console.error("Error submitting form:", error);
     }
   };
-
+  // console.log(cardsData[1]);
   return (
     <div className="min-h-screen w-full bg-red-50 flex flex-col justify-start items-center">
       <header className="w-full text-center py-12">
@@ -76,7 +79,17 @@ function App() {
         </Button>
       </main>
       <div className="mt-8 w-full">
-        <CarouselPage props={{ cardsData }} />
+        <CarouselPage props={{ cardsData, setModalOpen, setDataIndex }} />
+        {dataIndex !== undefined && (
+          <Modal
+            props={{
+              cardsData,
+              dataIndex: dataIndex,
+              modalOpen,
+              setModalOpen,
+            }}
+          />
+        )}
       </div>
     </div>
   );
