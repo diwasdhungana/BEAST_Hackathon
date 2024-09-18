@@ -5,24 +5,33 @@ import Location from "./pages/location";
 import Intrest from "./pages/intrest";
 import { Button } from "./components/ui/button";
 import CarouselPage from "./pages/carosel";
+import { cardsData } from "@/dummydata/colleges";
+import ProgramSelector from "./pages/program";
 
 function App() {
   const [selectedSubjects, setSelectedSubjects] = useState<string>("");
   const [stream, setStream] = useState<string>("");
   const [intrest, setIntrest] = useState<string>("");
   const [location, setLocation] = useState<string>("");
+  const [program, setProgram] = useState<string>("");
+
+  const [caroselCardData, setCaroselCardData] = useState(cardsData);
 
   const handleSubmit = async () => {
     const formData = {
-      selectedSubjects,
+      subjects: selectedSubjects,
       stream,
-      intrest,
+      intrest: program,
       location,
     };
 
     try {
-      const response = await axios.post("https://example.com/submit", formData);
+      const response = await axios.post(
+        "http://127.0.0.1:8000/recommend",
+        formData
+      );
       console.log("Form submitted successfully:", response.data);
+      setCaroselCardData(response.data);
     } catch (error) {
       console.error("Error submitting form:", error);
     }
@@ -54,19 +63,20 @@ function App() {
         </section>
 
         <section className="w-[400px] flex flex-col items-center">
-          <Intrest props={{ intrest, setIntrest }} />
+          {/* <Intrest props={{ intrest, setIntrest }} /> */}
+          <ProgramSelector props={{ program, setProgram, selectedSubjects }} />
         </section>
 
         <Button
           onClick={handleSubmit}
-          disabled={!stream || !location || intrest === ""}
+          disabled={!stream || !location || program === ""}
           variant="default"
         >
           Submit
         </Button>
       </main>
       <div className="mt-8 w-full">
-        <CarouselPage />
+        <CarouselPage props={{ cardsData }} />
       </div>
     </div>
   );
