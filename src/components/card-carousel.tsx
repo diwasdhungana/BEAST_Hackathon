@@ -33,11 +33,6 @@ const CardCarousel = ({ cards }) => {
     emblaApi.on("select", onSelect);
   }, [emblaApi, onSelect]);
 
-  // Log the cards data inside useEffect to ensure it's available
-  useEffect(() => {
-    console.log(cards, "from carousel");
-  }, [cards]);
-
   return (
     <div className="relative max-w-5xl mx-auto px-4">
       <div className="overflow-hidden" ref={emblaRef}>

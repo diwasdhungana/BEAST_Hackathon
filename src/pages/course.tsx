@@ -1,4 +1,13 @@
-import { Calculator, Atom, ChevronsUpDown } from "lucide-react";
+import {
+  Calculator,
+  Atom,
+  ChevronsUpDown,
+  Scale,
+  PenTool,
+  Users,
+  Microchip,
+  BookMarked,
+} from "lucide-react";
 
 import {
   Command,
@@ -37,7 +46,7 @@ export default function CommandDemo({ props }) {
       "PCB (Physics, Chemistry, Biology)",
     ],
     Management: ["Business Studies", "Accountancy", "Economics", "Mathematics"],
-    "Humanities and Social Sciences": [
+    Humanities_and_Social_Sciences: [
       "Sociology",
       "Psychology",
       "Political Science",
@@ -50,7 +59,7 @@ export default function CommandDemo({ props }) {
       "Criminal Law",
       "International Law",
     ],
-    Technica_lnd_Vocational: [
+    Technical_and_Vocational: [
       "Civil Engineering",
       "Computer Science",
       "Electrical Engineering",
@@ -69,21 +78,21 @@ export default function CommandDemo({ props }) {
   ];
 
   const [open, setOpen] = useState(false);
-
-  console.log(selectedSubjects);
   return (
     <>
       <h3 className="text-subtitle text-center mb-4">
         Which subject did you graduate with in highschool?
       </h3>
       <div className="flex justify-center w-full">
-        {selectedSubjects.length > 0 ? (
+        {selectedSubjects ? (
           <div className="flex align-middle">
+            <Badge variant="secondary">Stream:</Badge>
+            <div className="flex flex-wrap gap-1 p-4 self-center">
+              <Badge variant="default">{stream}</Badge>
+            </div>
             <Badge variant="secondary">Your subjects:</Badge>
             <div className="flex flex-wrap gap-1 p-4 self-center">
-              <Badge key={subject} variant="primary">
-                {selectedSubjects}
-              </Badge>
+              <Badge variant="default">{selectedSubjects}</Badge>
             </div>
           </div>
         ) : (
@@ -118,18 +127,20 @@ export default function CommandDemo({ props }) {
                     </span>
                   }
                 >
-                  {ScienceSubjects.map((subject) => (
+                  {subjectOptions.Science.map((subject) => (
                     <CommandItem key={subject}>
                       <Checkbox
                         id={subject}
-                        checked={selectedSubjects.includes(subject)}
+                        checked={selectedSubjects === subject}
                         onCheckedChange={() => {
+                          setStream("Science");
                           setSelectedSubjects(
-                            (prev) =>
-                              prev.includes(subject)
-                                ? prev.filter((s) => s !== subject) // Uncheck (remove subject)
-                                : [...prev, subject] // Check (add subject)
+                            (prev: string) =>
+                              prev === subject
+                                ? setSelectedSubjects("") // Uncheck (remove subject)
+                                : setSelectedSubjects(subject) // Check (add subject)
                           );
+                          setOpen(false);
                         }}
                       />
                       <label htmlFor={subject} className="ml-2">
@@ -147,18 +158,177 @@ export default function CommandDemo({ props }) {
                     </span>
                   }
                 >
-                  {ManagementSubjects.map((subject) => (
+                  {subjectOptions.Management.map((subject) => (
                     <CommandItem key={subject}>
                       <Checkbox
                         id={subject}
-                        checked={selectedSubjects.includes(subject)}
+                        checked={selectedSubjects === subject}
                         onCheckedChange={() => {
+                          setStream("Management");
                           setSelectedSubjects(
-                            (prev) =>
-                              prev.includes(subject)
-                                ? prev.filter((s) => s !== subject) // Uncheck (remove subject)
-                                : [...prev, subject] // Check (add subject)
+                            (prev: string) =>
+                              prev === subject
+                                ? setSelectedSubjects("") // Uncheck (remove subject)
+                                : setSelectedSubjects(subject) // Check (add subject)
                           );
+                          setOpen(false);
+                        }}
+                      />
+                      <label htmlFor={subject} className="ml-2">
+                        {subject}
+                      </label>
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+                <CommandSeparator />
+                <CommandGroup
+                  heading={
+                    <span className="flex">
+                      <Scale className="mr-2 h-4 w-4" />
+                      Law
+                    </span>
+                  }
+                >
+                  {subjectOptions.Law.map((subject) => (
+                    <CommandItem key={subject}>
+                      <Checkbox
+                        id={subject}
+                        checked={selectedSubjects === subject}
+                        onCheckedChange={() => {
+                          setStream("Law");
+                          setSelectedSubjects(
+                            (prev: string) =>
+                              prev === subject
+                                ? setSelectedSubjects("") // Uncheck (remove subject)
+                                : setSelectedSubjects(subject) // Check (add subject)
+                          );
+                          setOpen(false);
+                        }}
+                      />
+                      <label htmlFor={subject} className="ml-2">
+                        {subject}
+                      </label>
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+                <CommandSeparator />
+                <CommandGroup
+                  heading={
+                    <span className="flex">
+                      <Users className="mr-2 h-4 w-4" />
+                      Humanities and Social Science
+                    </span>
+                  }
+                >
+                  {subjectOptions.Humanities_and_Social_Sciences.map(
+                    (subject) => (
+                      <CommandItem key={subject}>
+                        <Checkbox
+                          id={subject}
+                          checked={selectedSubjects === subject}
+                          onCheckedChange={() => {
+                            setStream("Humanities and Social Science");
+                            setSelectedSubjects(
+                              (prev: string) =>
+                                prev === subject
+                                  ? setSelectedSubjects("") // Uncheck (remove subject)
+                                  : setSelectedSubjects(subject) // Check (add subject)
+                            );
+                            setOpen(false);
+                          }}
+                        />
+                        <label htmlFor={subject} className="ml-2">
+                          {subject}
+                        </label>
+                      </CommandItem>
+                    )
+                  )}
+                </CommandGroup>
+                <CommandSeparator />
+                <CommandGroup
+                  heading={
+                    <span className="flex">
+                      <BookMarked className="mr-2 h-4 w-4" />
+                      Education
+                    </span>
+                  }
+                >
+                  {subjectOptions.Education.map((subject) => (
+                    <CommandItem key={subject}>
+                      <Checkbox
+                        id={subject}
+                        checked={selectedSubjects === subject}
+                        onCheckedChange={() => {
+                          setStream("Education");
+                          setSelectedSubjects(
+                            (prev: string) =>
+                              prev === subject
+                                ? setSelectedSubjects("") // Uncheck (remove subject)
+                                : setSelectedSubjects(subject) // Check (add subject)
+                          );
+                          setOpen(false);
+                        }}
+                      />
+                      <label htmlFor={subject} className="ml-2">
+                        {subject}
+                      </label>
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+                <CommandSeparator />
+                <CommandGroup
+                  heading={
+                    <span className="flex">
+                      <Microchip className="mr-2 h-4 w-4" />
+                      Technical and Vocational
+                    </span>
+                  }
+                >
+                  {subjectOptions.Technical_and_Vocational.map((subject) => (
+                    <CommandItem key={subject}>
+                      <Checkbox
+                        id={subject}
+                        checked={selectedSubjects === subject}
+                        onCheckedChange={() => {
+                          setStream("Technical and Vocational");
+                          setSelectedSubjects(
+                            (prev: string) =>
+                              prev === subject
+                                ? setSelectedSubjects("") // Uncheck (remove subject)
+                                : setSelectedSubjects(subject) // Check (add subject)
+                          );
+                          setOpen(false);
+                        }}
+                      />
+                      <label htmlFor={subject} className="ml-2">
+                        {subject}
+                      </label>
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+                <CommandSeparator />
+                <CommandGroup
+                  heading={
+                    <span className="flex">
+                      <PenTool className="mr-2 h-4 w-4" />
+                      Fine Arts
+                    </span>
+                  }
+                >
+                  {subjectOptions.Fine_Arts.map((subject) => (
+                    <CommandItem key={subject}>
+                      <Checkbox
+                        id={subject}
+                        checked={selectedSubjects === subject}
+                        onCheckedChange={() => {
+                          setStream("Fine Arts");
+                          setSelectedSubjects(
+                            (prev: string) =>
+                              prev === subject
+                                ? setSelectedSubjects("") // Uncheck (remove subject)
+                                : setSelectedSubjects(subject) // Check (add subject)
+                          );
+                          setOpen(false);
                         }}
                       />
                       <label htmlFor={subject} className="ml-2">
