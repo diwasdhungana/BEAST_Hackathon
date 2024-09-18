@@ -3,6 +3,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import CustomCard from "./custom-card";
+import ProgramCard from "./programcard"
 
 const CardCarousel = ({ cards }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -43,6 +44,7 @@ const CardCarousel = ({ cards }) => {
               className="flex-[0_0_100%] min-w-0 sm:flex-[0_0_calc(50%-8px)] md:flex-[0_0_calc(33.33%-16px)]"
             >
               <CustomCard {...card} />
+              <ProgramCard/>
             </div>
           ))}
         </div>
