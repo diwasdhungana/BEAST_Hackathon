@@ -43,7 +43,7 @@ export default function Component({ props }) {
 
   return (
     <Dialog open={modalOpen} onOpenChange={() => setModalOpen(false)}>
-      <DialogContent className="sm:max-w-[700px] max-h-[80vh] overflow-y-auto bg-slate-400">
+      <DialogContent className="sm:max-w-[700px] max-h-[80vh] overflow-y-auto bg-gray-200">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold">{actualName}</DialogTitle>
         </DialogHeader>

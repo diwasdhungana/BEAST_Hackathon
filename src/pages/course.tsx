@@ -90,7 +90,7 @@ export default function CommandDemo({ props }) {
               variant="outline"
               role="combobox"
               // aria-expanded={open}
-              className="w-full justify-between"
+              className="w-full justify-between "
             >
               <div className="flex items-center">
                 <BookOpen className="mr-2 h-4 w-4 shrink-0 opacity-50" />

@@ -22,7 +22,7 @@ const LoadingAnimation = () => {
   return (
     <div className="flex flex-col items-center space-y-4">
       <div className="text-2xl font-bold animate-bounce">Loading</div>
-      <div className="w-8 h-8 border-4 border-blue-500 border-dotted rounded-full animate-spin"></div>
+      <div className="w-8 h-8 border-4 border-green-500 border-dotted rounded-full animate-spin"></div>
       <div className="text-lg">Analyzing...</div>
       <div className="text-lg">Optimizing Outputs...</div>
     </div>
@@ -33,7 +33,7 @@ const LoadingAnimation = () => {
 const ChatLoading = () => {
   return (
     <div className="flex justify-center mt-4">
-      <Loader2 className="animate-spin text-blue-500 w-6 h-6" />
+      <Loader2 className="animate-spin text-green-500 w-6 h-6" />
     </div>
   );
 };
@@ -125,7 +125,59 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-red-50 flex flex-col justify-start items-center relative">
+    <div className="min-h-screen w-full flex flex-col justify-start items-center relative">
+      {/* SVG background */}
+      <svg
+        className="fixed inset-0 w-full h-full -z-10"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1000 500"
+        preserveAspectRatio="xMidYMid slice"
+      >
+        {/* Dashed and moving lines */}
+        <line
+          x1="0"
+          y1="0"
+          x2="1000"
+          y2="500"
+          stroke="#f9f2f1"
+          strokeWidth="2"
+          strokeDasharray="5,5" // Dashed line
+          className="animate-line-1" // Animation class for individual movement
+        />
+        <line
+          x1="1000"
+          y1="0"
+          x2="0"
+          y2="500"
+          stroke="#f9f1f3"
+          strokeWidth="2"
+          strokeDasharray="5,5" // Dashed line
+          className="animate-line-2"
+        />
+
+        <circle
+          cx="200"
+          cy="100"
+          r="50"
+          fill="none"
+          stroke="#f9f1f3"
+          strokeWidth="4"
+          className="animate-circle"
+        />
+        <text
+          x="500" // Position in the middle horizontally
+          y="250" // Position in the middle vertically
+          textAnchor="middle"
+          dominantBaseline="middle"
+          fontSize="200" // Adjust the font size as needed
+          fill="#fdfafb"
+          className="font-bold" // Tailwind utility for bold text
+        >
+          What Next?
+        </text>
+      </svg>
+
+      {/* <div className="min-h-screen w-full bg-red-50 flex flex-col justify-start items-center relative"> */}
       <header className="w-full text-center py-12">
         <h1 className="text-3xl font-bold mb-3">What Next?</h1>
         <h3 className="text-lg text-gray-700">
@@ -165,6 +217,7 @@ function App() {
             onClick={handleSubmit}
             disabled={!stream || !location || program === ""}
             variant="default"
+            className="bg-green-400 w-[400px]"
           >
             Submit
           </Button>
@@ -189,11 +242,11 @@ function App() {
 
       {/* Chatbot Icon */}
       <Button
-        className="fixed bottom-4 right-4 rounded-full p-4"
+        className="fixed bottom-5 right-5 rounded-full p-6 bg-green-400"
         onClick={() => setIsChatOpen(true)}
       >
         <MessageCircle className="h-6 w-6" />
-        <span className="sr-only">Open chat</span>
+        Ask Chatbot
       </Button>
 
       {/* Chatbot Dialog */}
@@ -224,15 +277,15 @@ function App() {
                       }`}
                     >
                       {message.isUser ? (
-                        <User className="h-8 w-8 text-blue-500" />
+                        <User className="h-8 w-8 text-green-500" />
                       ) : (
-                        <Bot className="h-8 w-8 text-green-500" />
+                        <Bot className="h-8 w-8 text-blue-500" />
                       )}
                     </div>
                     <div
                       className={`p-3 rounded-lg shadow ${
                         message.isUser
-                          ? "bg-blue-500 text-white"
+                          ? "bg-green-500 text-white"
                           : "bg-white text-gray-800"
                       }`}
                     >
@@ -261,7 +314,7 @@ function App() {
               />
               <Button
                 onClick={handleSendMessage}
-                className="ml-2 bg-blue-500 hover:bg-blue-600"
+                className="ml-2 bg-green-500 hover:bg-green-600"
               >
                 <Send className="h-4 w-4" />
                 <span className="sr-only">Send message</span>

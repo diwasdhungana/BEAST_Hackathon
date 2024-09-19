@@ -208,7 +208,7 @@ const ProgramSelector = ({ props }) => {
           variant="outline"
           size="sm"
           onClick={toggleInputMode}
-          className="flex items-center"
+          className="flex items-center "
         >
           {isManualInput ? (
             <List className="mr-2" />

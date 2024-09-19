@@ -1,3 +1,36 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes move-left-right {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+}
+
+@keyframes move-up-down {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+/* Apply animation to individual lines */
+.animate-line-1 {
+  animation: move-left-right 5s ease-in-out infinite;
+}
+
+.animate-line-2 {
+  animation: move-up-down 7s ease-in-out infinite;
+}
+
+.animate-circle {
+  animation: move-left-right 4s ease-in-out infinite;
+}
