@@ -71,32 +71,19 @@ function App() {
     const formData = {
       subjects: selectedSubjects,
       stream,
-      intrest: program,
+      interest: program,
       location,
     };
 
     setIsLoading(true); // Start loading
 
-    // try {
-    //   const response = await axios.post(
-    //     "http://127.0.0.1:8000/recommend",
-    //     formData
-    //   );
-    //   console.log("Form submitted successfully:", response.data);
-    //   setCaroselCardData(response.data);
-    // } catch (error) {
-    //   console.error("Error submitting form:", error);
-    // } finally {
-    //   setIsLoading(false); // Stop loading
-    // }
-
     try {
-      // Simulating server response with a timeout
-      await new Promise((resolve) => setTimeout(resolve, 2000)); // 2 seconds delay
-      console.log("Form submitted successfully");
-
-      // Set caroselCardData to local cardsData
-      setCaroselCardData(cardsData);
+      const response = await axios.post(
+        "http://127.0.0.1:8000/recommend",
+        formData
+      );
+      console.log("Form submitted successfully:", response.data);
+      setCaroselCardData(response.data);
     } catch (error) {
       console.error("Error submitting form:", error);
     } finally {
@@ -111,18 +98,27 @@ function App() {
     setInputMessage("");
     setChatLoading(true); // Show chat loading
 
-    // Simulate bot response
-    setTimeout(() => {
+    //to be implemented later
+    try {
+      const formdata = { message: inputMessage };
+      console.log(formdata);
+      const response = await axios.post(
+        "http://127.0.0.1:8000/chatbot",
+        formdata
+      );
+      console.log("message sent successfully:", response.data.response);
       setMessages((prev) => [
         ...prev,
         {
-          content:
-            "Thank you for your question. I'm here to help you with your college search. Could you please provide more details about what you're looking for in a college?",
+          content: response.data.response,
           isUser: false,
         },
       ]);
-      setChatLoading(false); // Hide chat loading
-    }, 1000);
+    } catch (error) {
+      console.error("Error submitting message:", error);
+    } finally {
+      setChatLoading(false); // Stop loading
+    }
   };
 
   return (
@@ -224,25 +220,26 @@ function App() {
           </Button>
         </main>
       )}
-
-      <div className="mt-8 w-full">
-        <CarouselPage
-          props={{ cardsData: caroselCardData, setModalOpen, setDataIndex }}
-        />
-        {dataIndex !== undefined && (
-          <Modal
-            props={{
-              cardsData: caroselCardData,
-              dataIndex: dataIndex,
-              modalOpen,
-              setModalOpen,
-              setIsChatOpen,
-              setInputMessage,
-              textAreaRef,
-            }}
+      {caroselCardData.length > 0 && (
+        <div className="mt-8 w-full">
+          <CarouselPage
+            props={{ cardsData: caroselCardData, setModalOpen, setDataIndex }}
           />
-        )}
-      </div>
+          {dataIndex !== undefined && (
+            <Modal
+              props={{
+                cardsData: caroselCardData,
+                dataIndex: dataIndex,
+                modalOpen,
+                setModalOpen,
+                setIsChatOpen,
+                setInputMessage,
+                textAreaRef,
+              }}
+            />
+          )}
+        </div>
+      )}
 
       {/* Chatbot Icon */}
       <Button
