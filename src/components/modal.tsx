@@ -9,20 +9,20 @@ import {
 import { Button } from "@/components/ui/button";
 import { MessageCircle } from "lucide-react";
 
-type UniversityInfo = {
-  name: string;
-  location: string;
-  eligibility_criteria: string[];
-  course_duration: string;
-  tuition_fees: string;
-  programs_offered: string[];
-  scholarships_offered: string[];
-  contact: {
-    phone: string;
-    email: string;
-    address: string;
-  };
-};
+// type UniversityInfo = {
+//   name: string;
+//   location: string;
+//   eligibility_criteria: string[];
+//   course_duration: string;
+//   tuition_fees: string;
+//   programs_offered: string[];
+//   scholarships_offered: string[];
+//   contact: {
+//     phone: string;
+//     email: string;
+//     address: string;
+//   };
+// };
 const extractActualName = (fullName) => {
   const match = fullName.match(/\d+\.\s*\*(.*?)\*/);
   return match ? match[1] : fullName;
@@ -47,6 +47,7 @@ export default function Component({ props }) {
     tuition_fees: cardsData[dataIndex].tuition_fees,
     contact: cardsData[dataIndex].contact,
     scholarships_offered: cardsData[dataIndex].scholarships_offered,
+    website: cardsData[dataIndex].website_url,
   };
   const actualName = extractActualName(universityInfo.name);
 
@@ -60,7 +61,7 @@ export default function Component({ props }) {
           <div className="w-full flex justify-between ">
             <Button className="bg-green-400 " variant="default">
               <a
-                href="https://www.github.com"
+                href={universityInfo.website}
                 target="_blank"
                 rel="noopener noreferrer"
               >
