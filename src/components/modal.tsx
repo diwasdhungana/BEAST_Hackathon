@@ -7,6 +7,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { MessageCircle } from "lucide-react";
 
 type UniversityInfo = {
   name: string;
@@ -28,7 +29,15 @@ const extractActualName = (fullName) => {
 };
 
 export default function Component({ props }) {
-  const { cardsData, dataIndex, modalOpen, setModalOpen } = props;
+  const {
+    cardsData,
+    dataIndex,
+    modalOpen,
+    setModalOpen,
+    setIsChatOpen,
+    setInputMessage,
+    textAreaRef,
+  } = props;
   const universityInfo = {
     name: cardsData[dataIndex].name,
     location: cardsData[dataIndex].location,
@@ -48,6 +57,42 @@ export default function Component({ props }) {
           <DialogTitle className="text-2xl font-bold">{actualName}</DialogTitle>
         </DialogHeader>
         <div className="grid gap-4 py-4">
+          <div className="w-full flex justify-between ">
+            <Button className="bg-green-400 " variant="default">
+              <a
+                href="https://www.github.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                visit College's website
+              </a>
+            </Button>
+            <Button
+              className="bg-green-400"
+              variant="default"
+              onClick={() => {
+                setInputMessage(
+                  "Based on this College \nCollege's Name: " +
+                    actualName +
+                    "\nlocation: " +
+                    universityInfo.location +
+                    "\nI want to know \n" +
+                    " "
+                );
+                setIsChatOpen(true);
+                setModalOpen(false);
+                setTimeout(() => {
+                  if (textAreaRef.current) {
+                    const textArea = textAreaRef.current;
+                    const textLength = textArea.value.length;
+                    textArea.setSelectionRange(textLength, textLength);
+                  }
+                }, 100);
+              }}
+            >
+              Ask Bot <MessageCircle className="ml-2 h-6 w-6" />
+            </Button>
+          </div>
           <div>
             <h3 className="text-lg font-semibold mb-2">Location</h3>
             <p>{universityInfo.location}</p>

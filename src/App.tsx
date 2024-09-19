@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import axios from "axios";
 import CourseSelector from "./pages/course";
 import Location from "./pages/location";
@@ -51,6 +51,7 @@ function App() {
   const [modalOpen, setModalOpen] = useState(false);
   const [dataIndex, setDataIndex] = useState<number>();
   const [caroselCardData, setCaroselCardData] = useState([]);
+  const textAreaRef = useRef(null);
 
   const [isLoading, setIsLoading] = useState(false); // Main loading state
   const [chatLoading, setChatLoading] = useState(false); // Chat loading state
@@ -235,6 +236,9 @@ function App() {
               dataIndex: dataIndex,
               modalOpen,
               setModalOpen,
+              setIsChatOpen,
+              setInputMessage,
+              textAreaRef,
             }}
           />
         )}
@@ -310,7 +314,8 @@ function App() {
                     handleSendMessage();
                   }
                 }}
-                className="flex-grow min-h-[100px] bg-white"
+                className="flex-grow min-h-[150px] bg-white"
+                ref={textAreaRef}
               />
               <Button
                 onClick={handleSendMessage}

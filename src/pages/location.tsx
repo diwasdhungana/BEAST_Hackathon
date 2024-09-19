@@ -30,7 +30,7 @@ const location = ({ props }) => {
           >
             <div className="flex items-center">
               <MapPin className="mr-2 h-4 w-4 shrink-0 opacity-50" />
-              {location ? location : "Select locations..."}
+              {location ? location : "Prefered college's location"}
             </div>
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
